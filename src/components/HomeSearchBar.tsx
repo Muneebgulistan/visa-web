@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from '@/i18n/routing';
-import { Search, Compass, MapPin } from 'lucide-react';
+import { Search, Compass, MapPin, ArrowUpRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function HomeSearchBar() {
@@ -23,21 +23,21 @@ export default function HomeSearchBar() {
   return (
     <form
       onSubmit={handleSearch}
-      className="bg-white rounded-[14px] p-3 sm:p-4 shadow-xl border border-gray-100 grid grid-cols-1 md:grid-cols-12 gap-3"
+      className="bg-card-light/95 backdrop-blur-md rounded-2xl sm:rounded-pill p-2 sm:p-3 shadow-soft border border-white/60 flex flex-col md:flex-row items-center gap-2.5 w-full max-w-4xl mx-auto"
     >
       {/* Visa Type Selector */}
-      <div className="md:col-span-5 relative flex items-center bg-gray-50/80 rounded-xl px-3.5 py-2.5 border border-gray-200 focus-within:border-teal">
-        <Compass className="w-5 h-5 text-teal mr-2.5 rtl:mr-0 rtl:ml-2.5 flex-shrink-0" />
-        <div className="w-full">
-          <label className="block text-[10px] uppercase font-bold text-gray-400 leading-none">
+      <div className="w-full md:flex-1 relative flex items-center bg-white/80 hover:bg-white rounded-pill px-4 py-2.5 transition-all border border-white/50 focus-within:border-luxury-accent focus-within:bg-white">
+        <Compass className="w-4 h-4 text-luxury-accent mr-2.5 rtl:mr-0 rtl:ml-2.5 flex-shrink-0" />
+        <div className="w-full text-left rtl:text-right">
+          <label className="block text-[11px] font-medium text-dark-200 leading-none">
             {t('searchVisaType')}
           </label>
           <select
             value={visaType}
             onChange={(e) => setVisaType(e.target.value)}
-            className="w-full bg-transparent text-sm font-semibold text-dark focus:outline-none cursor-pointer mt-1"
+            className="w-full bg-transparent text-xs sm:text-sm font-medium text-dark focus:outline-none cursor-pointer mt-0.5 truncate"
           >
-            <option value="all">All Visa Types</option>
+            <option value="all">All visa categories</option>
             <option value="tourist">{t('touristVisa')}</option>
             <option value="business">{t('businessVisa')}</option>
             <option value="student">{t('studentVisa')}</option>
@@ -47,20 +47,20 @@ export default function HomeSearchBar() {
       </div>
 
       {/* Destination Selector */}
-      <div className="md:col-span-5 relative flex items-center bg-gray-50/80 rounded-xl px-3.5 py-2.5 border border-gray-200 focus-within:border-teal">
-        <MapPin className="w-5 h-5 text-coral mr-2.5 rtl:mr-0 rtl:ml-2.5 flex-shrink-0" />
-        <div className="w-full">
-          <label className="block text-[10px] uppercase font-bold text-gray-400 leading-none">
+      <div className="w-full md:flex-1 relative flex items-center bg-white/80 hover:bg-white rounded-pill px-4 py-2.5 transition-all border border-white/50 focus-within:border-luxury-accent focus-within:bg-white">
+        <MapPin className="w-4 h-4 text-luxury-highlight mr-2.5 rtl:mr-0 rtl:ml-2.5 flex-shrink-0" />
+        <div className="w-full text-left rtl:text-right">
+          <label className="block text-[11px] font-medium text-dark-200 leading-none">
             {t('searchDestination')}
           </label>
           <select
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            className="w-full bg-transparent text-sm font-semibold text-dark focus:outline-none cursor-pointer mt-1"
+            className="w-full bg-transparent text-xs sm:text-sm font-medium text-dark focus:outline-none cursor-pointer mt-0.5 truncate"
           >
             <option value="all">{t('allDestinations')}</option>
             <option value="United Kingdom">United Kingdom (UK)</option>
-            <option value="France">Schengen (France, Germany, Italy, Spain)</option>
+            <option value="France">Schengen Area (France, Germany, Italy, Spain)</option>
             <option value="United States">United States (USA)</option>
             <option value="Canada">Canada</option>
             <option value="Japan">Japan</option>
@@ -71,15 +71,15 @@ export default function HomeSearchBar() {
         </div>
       </div>
 
-      {/* Submit Button */}
-      <div className="md:col-span-2">
+      {/* Submit Action: Pill-shaped dark button with ample padding and arrow */}
+      <div className="w-full md:w-auto flex-shrink-0">
         <button
           type="submit"
-          className="w-full h-full min-h-[50px] rounded-xl bg-coral hover:bg-coral-600 text-white font-bold text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 rtl:space-x-reverse"
+          className="btn-pill-primary w-full md:w-auto py-3 px-6 text-xs sm:text-sm gap-2 whitespace-nowrap shadow-soft"
         >
-          <Search className="w-4 h-4" />
-          <span className="hidden sm:inline md:hidden lg:inline">{t('searchAction')}</span>
-          <span className="sm:hidden md:inline lg:hidden">Search</span>
+          <Search className="w-3.5 h-3.5 text-luxury-highlight" />
+          <span>{t('searchAction')}</span>
+          <ArrowUpRight className="w-3.5 h-3.5 opacity-60 hidden sm:inline" />
         </button>
       </div>
     </form>

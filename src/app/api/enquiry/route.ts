@@ -50,7 +50,43 @@ export async function POST(request: NextRequest) {
     const emailTo = process.env.EMAIL_TO || 'info@skvisaexperts.com';
     const emailFrom = process.env.EMAIL_FROM || 'SK Visa Experts <enquiries@skvisaexperts.com>';
 
-    // Option 1: Resend API if configured
+    // Option 1: Web3Forms API dispatch
+    const web3formsKey =
+      process.env.WEB3FORMS_ACCESS_KEY ||
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+      body.access_key;
+
+    if (web3formsKey && web3formsKey !== 'placeholder') {
+      try {
+        const web3Res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: web3formsKey,
+            subject: `[Visa Enquiry] ${enquiryRecord.serviceType} - ${enquiryRecord.name} (${enquiryRef})`,
+            from_name: 'SK Visa Experts',
+            name: enquiryRecord.name,
+            email: enquiryRecord.email,
+            phone: enquiryRecord.phone,
+            service: enquiryRecord.serviceType,
+            destination: enquiryRecord.destination,
+            travel_date: enquiryRecord.travelDate,
+            message: enquiryRecord.message || 'No additional notes provided.',
+            reference: enquiryRef,
+          }),
+        });
+
+        const web3Data = await web3Res.json();
+        console.log('[Web3Forms Dispatch]', web3Data);
+      } catch (w3Err) {
+        console.error('[Web3Forms Error]', w3Err);
+      }
+    }
+
+    // Option 2: Resend API if configured
     if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 'placeholder') {
       try {
         const resendRes = await fetch('https://api.resend.com/emails', {

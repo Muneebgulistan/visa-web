@@ -8,7 +8,7 @@ import {
   Clock,
   Star,
   Shield,
-  ArrowRight,
+  ArrowUpRight,
   MessageCircle,
 } from 'lucide-react';
 
@@ -19,235 +19,181 @@ export default function Footer() {
   const tServices = useTranslations('services');
 
   return (
-    <footer className="bg-dark text-gray-300 pt-16 pb-12 border-t border-dark-400">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Column 1: Brand & Bio */}
-          <div className="space-y-4">
+    <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-4">
+      <div className="bg-card-dark text-white bento-card p-8 sm:p-12 border border-white/10 relative overflow-hidden space-y-12 shadow-float">
+        {/* Subtle background blueprint lines */}
+        <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
+          {/* Column 1: Brand & Bio (4 cols) */}
+          <div className="lg:col-span-4 space-y-5">
             <Link
               href="/"
-              className="flex items-center space-x-3 rtl:space-x-reverse"
+              className="flex items-center space-x-3 rtl:space-x-reverse group"
             >
-              <div className="w-10 h-10 rounded-[14px] bg-teal flex items-center justify-center text-white shadow">
-                <Compass className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-[20px] bg-white/10 flex items-center justify-center text-white border border-white/20 shadow-sm group-hover:scale-105 transition-transform">
+                <Compass className="w-5 h-5 text-luxury-accent" />
               </div>
               <div>
-                <span className="text-xl font-extrabold text-white block leading-none">
-                  SK VISA
+                <span className="text-lg font-bold tracking-tight text-white block leading-none">
+                  SK VISA EXPERTS
                 </span>
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-teal-400 block mt-0.5">
-                  EXPERTS • RIYADH
+                <span className="text-[11px] font-medium text-white/60 block mt-0.5">
+                  Private Advisory • Riyadh
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
               {t('aboutText')}
             </p>
 
             {/* Google Rating Badge */}
-            <div className="bg-dark-600 border border-dark-400 p-3.5 rounded-[14px] flex items-center space-x-3 rtl:space-x-reverse">
+            <div className="bg-white/5 border border-white/10 p-4 rounded-2xl flex items-center space-x-3 rtl:space-x-reverse max-w-xs">
               <div className="flex text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-4 h-4 ${
+                    className={`w-3.5 h-3.5 ${
                       i < 4
-                        ? 'fill-amber-400'
+                        ? 'fill-amber-400 text-amber-400'
                         : i === 4
-                        ? 'fill-amber-400/50'
-                        : 'text-gray-600'
+                        ? 'fill-amber-400/50 text-amber-400'
+                        : 'text-white/20'
                     }`}
                   />
                 ))}
               </div>
               <div className="text-xs">
-                <span className="font-bold text-white block">
+                <span className="font-semibold text-white block">
                   4.4 / 5.0 Rating
                 </span>
-                <span className="text-gray-400">
+                <span className="text-white/60">
                   {tCommon('googleReviews')}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold text-base tracking-wide border-b border-dark-400 pb-2">
+          {/* Column 2: Navigation Links (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-semibold text-white/50 tracking-wider uppercase border-b border-white/10 pb-2">
               {t('quickLinks')}
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
                 <Link
                   href="/"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                  className="text-white/80 hover:text-white transition-colors flex items-center justify-between group"
                 >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
                   <span>{tNav('home')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-luxury-highlight transition-colors" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/visas"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                  className="text-white/80 hover:text-white transition-colors flex items-center justify-between group"
                 >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
                   <span>{tNav('visas')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-luxury-highlight transition-colors" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/packages"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                  className="text-white/80 hover:text-white transition-colors flex items-center justify-between group"
                 >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
                   <span>{tNav('packages')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-luxury-highlight transition-colors" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/hotels"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                  className="text-white/80 hover:text-white transition-colors flex items-center justify-between group"
                 >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
                   <span>{tNav('hotels')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-luxury-highlight transition-colors" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/airline"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                  className="text-white/80 hover:text-white transition-colors flex items-center justify-between group"
                 >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
                   <span>{tNav('airline')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-luxury-highlight transition-colors" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
+                  className="text-white/80 hover:text-white transition-colors flex items-center justify-between group"
                 >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
                   <span>{tNav('about')}</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="hover:text-teal-400 transition-colors flex items-center space-x-1 rtl:space-x-reverse"
-                >
-                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-teal-500" />
-                  <span>{tNav('faq')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-luxury-highlight transition-colors" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Core Services */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold text-base tracking-wide border-b border-dark-400 pb-2">
-              {tServices('title')}
+          {/* Column 3: Services (2 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-xs font-semibold text-white/50 tracking-wider uppercase border-b border-white/10 pb-2">
+              {t('servicesTitle')}
             </h3>
-            <ul className="space-y-2 text-xs text-gray-300">
-              <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="text-teal-400 font-bold">•</span>
-                <span>{tServices('service1Title')}</span>
-              </li>
-              <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="text-teal-400 font-bold">•</span>
-                <span>{tServices('service2Title')}</span>
-              </li>
-              <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="text-teal-400 font-bold">•</span>
-                <span>{tServices('service3Title')}</span>
-              </li>
-              <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="text-teal-400 font-bold">•</span>
-                <span>{tServices('service4Title')}</span>
-              </li>
-              <li className="flex items-start space-x-2 rtl:space-x-reverse">
-                <span className="text-teal-400 font-bold">•</span>
-                <span>{tServices('service5Title')}</span>
-              </li>
+            <ul className="space-y-2 text-xs text-white/70">
+              <li>{tServices('service1Title')}</li>
+              <li>{tServices('service2Title')}</li>
+              <li>{tServices('service3Title')}</li>
+              <li>{tServices('service4Title')}</li>
+              <li>{tServices('service5Title')}</li>
             </ul>
-            <div className="pt-2">
-              <div className="bg-dark-600 p-3 rounded-lg border border-dark-400 flex items-center space-x-2 text-xs text-gray-300">
-                <Shield className="w-4 h-4 text-coral flex-shrink-0" />
-                <span>8 Authorized Payment Gateways Supported</span>
-              </div>
-            </div>
           </div>
 
-          {/* Column 4: Contact & Location */}
-          <div className="space-y-4">
-            <h3 className="text-white font-bold text-base tracking-wide border-b border-dark-400 pb-2">
-              Riyadh Office
+          {/* Column 4: Riyadh Office & Contact (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-semibold text-white/50 tracking-wider uppercase border-b border-white/10 pb-2">
+              {t('contactTitle')}
             </h3>
-            <div className="space-y-3 text-sm">
+
+            <div className="space-y-3 text-xs text-white/80">
               <div className="flex items-start space-x-2.5 rtl:space-x-reverse">
-                <MapPin className="w-4 h-4 text-coral mt-1 flex-shrink-0" />
-                <span className="text-gray-300 leading-snug">
-                  {tCommon('address')}
-                </span>
+                <MapPin className="w-4 h-4 text-luxury-highlight flex-shrink-0 mt-0.5" />
+                <span>{tCommon('address')}</span>
               </div>
 
               <div className="flex items-center space-x-2.5 rtl:space-x-reverse">
-                <Phone className="w-4 h-4 text-coral flex-shrink-0" />
+                <Clock className="w-4 h-4 text-luxury-accent flex-shrink-0" />
+                <span>{tCommon('hours')}</span>
+              </div>
+
+              <div className="pt-2">
                 <a
                   href="tel:+966599326936"
-                  className="text-white hover:text-teal-400 font-medium"
-                  dir="ltr"
+                  className="btn-pill-primary w-full py-2.5 text-xs gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white justify-center"
                 >
-                  +966 59 932 6936
+                  <Phone className="w-3.5 h-3.5 text-luxury-highlight" />
+                  <span dir="ltr">+966 59 932 6936</span>
                 </a>
-              </div>
-
-              <div className="flex items-center space-x-2.5 rtl:space-x-reverse">
-                <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <a
-                  href="https://wa.me/966599326936"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-emerald-400 hover:text-emerald-300 font-medium"
-                  dir="ltr"
-                >
-                  WhatsApp: +966 59 932 6936
-                </a>
-              </div>
-
-              <div className="flex items-start space-x-2.5 rtl:space-x-reverse">
-                <Clock className="w-4 h-4 text-teal-400 mt-1 flex-shrink-0" />
-                <span className="text-gray-400 text-xs">
-                  {tCommon('hours')}
-                </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Legal */}
-        <div className="mt-12 pt-8 border-t border-dark-400 text-xs text-gray-400 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>© {new Date().getFullYear()} {t('rights')}</p>
-          <div className="flex items-center space-x-6 rtl:space-x-reverse">
-            <Link
-              href="/privacy"
-              className="hover:text-teal-400 transition-colors"
-            >
-              {t('privacyPolicy')}
+        {/* Bottom bar: Legal & Disclaimers */}
+        <div className="relative z-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
+          <div>{t('copyright')}</div>
+          <div className="flex items-center space-x-4 rtl:space-x-reverse">
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              {t('privacy')}
             </Link>
-            <Link
-              href="/terms"
-              className="hover:text-teal-400 transition-colors"
-            >
-              {t('termsOfService')}
+            <span>•</span>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              {t('terms')}
             </Link>
           </div>
-        </div>
-
-        {/* Legal Disclaimer */}
-        <div className="mt-4 text-[11px] text-gray-500 text-center leading-relaxed">
-          {t('disclaimer')}
         </div>
       </div>
     </footer>

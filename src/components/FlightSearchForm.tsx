@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PlaneTakeoff, PlaneLanding, Calendar, Users, Send, CheckCircle2, Loader2 } from 'lucide-react';
+import { PlaneTakeoff, PlaneLanding, Calendar, Users, Send, CheckCircle2, Loader2, ArrowUpRight } from 'lucide-react';
 
 export default function FlightSearchForm() {
   const [from, setFrom] = useState('RUH - King Khalid Intl, Riyadh');
@@ -39,6 +39,7 @@ export default function FlightSearchForm() {
           destination: to,
           travelDate: departureDate,
           message: flightNotes,
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
         }),
       });
 
@@ -57,22 +58,24 @@ export default function FlightSearchForm() {
   };
 
   return (
-    <div className="bg-white rounded-[14px] shadow-xl border border-gray-100 p-6 sm:p-8">
+    <div className="bg-card-light bento-card border border-white/50 p-6 sm:p-8 shadow-soft">
       {submitted ? (
         <div className="text-center py-8 space-y-4">
-          <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle2 className="w-10 h-10" />
+          <div className="w-14 h-14 bg-dark text-white rounded-full flex items-center justify-center mx-auto shadow-soft">
+            <CheckCircle2 className="w-8 h-8 text-luxury-highlight" />
           </div>
-          <h3 className="text-2xl font-bold text-dark">
-            Flight Itinerary Request Confirmed!
+          <h3 className="text-2xl font-normal text-dark">
+            <span className="font-light italic">Flight Itinerary</span> Request Confirmed
           </h3>
-          <p className="text-gray-600 text-sm max-w-lg mx-auto">
-            Thank you, <strong>{name}</strong>. Your flight itinerary request for{' '}
-            <strong>{from}</strong> to <strong>{to}</strong> has been logged with reference{' '}
-            <span className="font-mono font-bold text-teal">{reference}</span>.
+          <p className="text-xs sm:text-sm text-dark-200 max-w-lg mx-auto">
+            Thank you, <strong>{name}</strong>. Your provisional flight dossier from{' '}
+            <strong>{from}</strong> to <strong>{to}</strong> has been assigned reference{' '}
+            <span className="font-mono font-bold text-dark bg-white/80 px-2 py-0.5 rounded-pill border border-dark/10">
+              {reference}
+            </span>.
           </p>
-          <p className="text-xs text-gray-500">
-            Our Riyadh flight ticketing specialist will verify active airline PNR options and send your quote to{' '}
+          <p className="text-xs text-dark-200">
+            Our Riyadh flight logistics specialist will verify active airline PNR options and send your quote to{' '}
             <strong>{email}</strong> and WhatsApp <strong>{phone}</strong> within 2 hours.
           </p>
           <div className="pt-4">
@@ -82,44 +85,46 @@ export default function FlightSearchForm() {
                 setSubmitted(false);
                 setName('');
               }}
-              className="px-6 py-2.5 rounded-[14px] bg-teal text-white font-semibold text-sm hover:bg-teal-800 transition-colors"
+              className="btn-pill-primary py-2.5 px-6 text-xs gap-1.5"
             >
               Request Another Flight Quote
             </button>
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Trip Type radio buttons */}
-          <div className="flex items-center space-x-6 rtl:space-x-reverse pb-2 border-b border-gray-100">
-            <label className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer text-sm font-semibold text-dark">
-              <input
-                type="radio"
-                name="tripType"
-                checked={tripType === 'roundTrip'}
-                onChange={() => setTripType('roundTrip')}
-                className="text-teal focus:ring-teal"
-              />
-              <span>Round Trip</span>
-            </label>
-            <label className="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer text-sm font-semibold text-dark">
-              <input
-                type="radio"
-                name="tripType"
-                checked={tripType === 'oneWay'}
-                onChange={() => setTripType('oneWay')}
-                className="text-teal focus:ring-teal"
-              />
-              <span>One Way</span>
-            </label>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Trip Type radio buttons: Pill Style */}
+          <div className="flex items-center space-x-3 rtl:space-x-reverse pb-3 border-b border-dark/10">
+            <button
+              type="button"
+              onClick={() => setTripType('roundTrip')}
+              className={`px-4 py-1.5 rounded-pill text-xs font-medium transition-all ${
+                tripType === 'roundTrip'
+                  ? 'bg-dark text-white font-semibold shadow-soft'
+                  : 'bg-white/70 text-dark hover:bg-white'
+              }`}
+            >
+              Round Trip
+            </button>
+            <button
+              type="button"
+              onClick={() => setTripType('oneWay')}
+              className={`px-4 py-1.5 rounded-pill text-xs font-medium transition-all ${
+                tripType === 'oneWay'
+                  ? 'bg-dark text-white font-semibold shadow-soft'
+                  : 'bg-white/70 text-dark hover:bg-white'
+              }`}
+            >
+              One Way
+            </button>
           </div>
 
           {/* Cities & Dates Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {/* Origin */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-600 mb-1 flex items-center">
-                <PlaneTakeoff className="w-3.5 h-3.5 text-teal mr-1 rtl:mr-0 rtl:ml-1" />
+              <label className="block text-[11px] font-medium text-dark-200 mb-1 flex items-center">
+                <PlaneTakeoff className="w-3.5 h-3.5 text-luxury-accent mr-1 rtl:mr-0 rtl:ml-1" />
                 From (Origin)
               </label>
               <input
@@ -127,15 +132,15 @@ export default function FlightSearchForm() {
                 required
                 value={from}
                 onChange={(e) => setFrom(e.target.value)}
-                placeholder="Riyadh (RUH), Jeddah (JED)..."
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-sm text-dark font-medium"
+                placeholder="Riyadh (RUH)..."
+                className="w-full px-4 py-2.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
             </div>
 
             {/* Destination */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-600 mb-1 flex items-center">
-                <PlaneLanding className="w-3.5 h-3.5 text-coral mr-1 rtl:mr-0 rtl:ml-1" />
+              <label className="block text-[11px] font-medium text-dark-200 mb-1 flex items-center">
+                <PlaneLanding className="w-3.5 h-3.5 text-luxury-highlight mr-1 rtl:mr-0 rtl:ml-1" />
                 To (Destination)
               </label>
               <input
@@ -143,15 +148,15 @@ export default function FlightSearchForm() {
                 required
                 value={to}
                 onChange={(e) => setTo(e.target.value)}
-                placeholder="London (LHR), Paris (CDG)..."
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-sm text-dark font-medium"
+                placeholder="London (LHR)..."
+                className="w-full px-4 py-2.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
             </div>
 
             {/* Departure Date */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-600 mb-1 flex items-center">
-                <Calendar className="w-3.5 h-3.5 text-teal mr-1 rtl:mr-0 rtl:ml-1" />
+              <label className="block text-[11px] font-medium text-dark-200 mb-1 flex items-center">
+                <Calendar className="w-3.5 h-3.5 text-luxury-accent mr-1 rtl:mr-0 rtl:ml-1" />
                 Departure Date
               </label>
               <input
@@ -159,14 +164,14 @@ export default function FlightSearchForm() {
                 required
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-sm text-dark"
+                className="w-full px-4 py-2.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
             </div>
 
             {/* Return Date */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-600 mb-1 flex items-center">
-                <Calendar className="w-3.5 h-3.5 text-teal mr-1 rtl:mr-0 rtl:ml-1" />
+              <label className="block text-[11px] font-medium text-dark-200 mb-1 flex items-center">
+                <Calendar className="w-3.5 h-3.5 text-luxury-accent mr-1 rtl:mr-0 rtl:ml-1" />
                 Return Date {tripType === 'oneWay' && '(Optional)'}
               </label>
               <input
@@ -174,21 +179,21 @@ export default function FlightSearchForm() {
                 disabled={tripType === 'oneWay'}
                 value={returnDate}
                 onChange={(e) => setReturnDate(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-sm text-dark disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-4 py-2.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark disabled:bg-white/40 disabled:cursor-not-allowed"
               />
             </div>
           </div>
 
           {/* Cabin Class & Passengers */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-600 mb-1">
+              <label className="block text-[11px] font-medium text-dark-200 mb-1">
                 Cabin Class
               </label>
               <select
                 value={cabinClass}
                 onChange={(e) => setCabinClass(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-sm text-dark"
+                className="w-full px-4 py-2.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark cursor-pointer"
               >
                 <option value="economy">Economy Class</option>
                 <option value="premiumEconomy">Premium Economy</option>
@@ -198,9 +203,9 @@ export default function FlightSearchForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-600 mb-1 flex items-center">
-                <Users className="w-3.5 h-3.5 text-teal mr-1 rtl:mr-0 rtl:ml-1" />
-                Passengers (Adults & Children)
+              <label className="block text-[11px] font-medium text-dark-200 mb-1 flex items-center">
+                <Users className="w-3.5 h-3.5 text-luxury-accent mr-1 rtl:mr-0 rtl:ml-1" />
+                Passengers (Adults &amp; Children)
               </label>
               <input
                 type="number"
@@ -208,14 +213,14 @@ export default function FlightSearchForm() {
                 max="20"
                 value={passengers}
                 onChange={(e) => setPassengers(Number(e.target.value))}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-sm text-dark"
+                className="w-full px-4 py-2.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
             </div>
           </div>
 
           {/* Contact Details for Quote Delivery */}
-          <div className="p-4 bg-mint rounded-xl border border-teal-100 space-y-3">
-            <span className="text-xs font-bold text-teal-900 block uppercase tracking-wider">
+          <div className="p-4 sm:p-5 bg-white/80 rounded-2xl border border-white/60 space-y-3">
+            <span className="text-[11px] font-semibold text-dark block">
               Where should we send your official PNR quote?
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -225,7 +230,7 @@ export default function FlightSearchForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Full Name *"
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-teal"
+                className="w-full px-4 py-2 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
               <input
                 type="email"
@@ -233,21 +238,21 @@ export default function FlightSearchForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email Address *"
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-teal"
+                className="w-full px-4 py-2 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
               <input
                 type="tel"
                 required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="WhatsApp Phone (+966...) *"
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-teal"
+                placeholder="WhatsApp (+966...) *"
+                className="w-full px-4 py-2 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
               />
             </div>
           </div>
 
           {error && (
-            <p className="text-xs text-red-600 bg-red-50 p-2.5 rounded-lg border border-red-200">
+            <p className="text-xs text-red-700 bg-red-100 p-3 rounded-2xl border border-red-200">
               {error}
             </p>
           )}
@@ -256,17 +261,17 @@ export default function FlightSearchForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 px-6 rounded-[14px] bg-coral hover:bg-coral-600 text-white font-bold text-base transition-all shadow-md hover:shadow-lg disabled:opacity-70 flex items-center justify-center space-x-2"
+            className="btn-pill-primary w-full py-3.5 text-sm gap-2 shadow-soft disabled:opacity-60"
           >
             {loading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
                 <span>Preparing Airline Itinerary Options...</span>
               </>
             ) : (
               <>
-                <Send className="w-5 h-5" />
                 <span>Request Verifiable Flight Itinerary Quote</span>
+                <ArrowUpRight className="w-4 h-4 text-luxury-highlight" />
               </>
             )}
           </button>

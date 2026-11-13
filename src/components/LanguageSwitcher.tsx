@@ -28,14 +28,14 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative inline-flex items-center text-xs">
-      <div className="flex items-center space-x-1 rtl:space-x-reverse bg-gray-100 hover:bg-gray-200/80 px-2.5 py-1.5 rounded-full transition-colors border border-gray-200">
-        <Globe className="w-3.5 h-3.5 text-teal" />
+      <div className="flex items-center space-x-1.5 rtl:space-x-reverse bg-white/70 hover:bg-white px-3 py-1.5 rounded-pill transition-all border border-white/50 shadow-subtle">
+        <Globe className="w-3.5 h-3.5 text-luxury-accent" />
         <select
           value={currentLocale}
           disabled={isPending}
           onChange={(e) => handleLocaleChange(e.target.value as Locale)}
           aria-label="Select Language"
-          className="bg-transparent font-medium text-dark focus:outline-none cursor-pointer text-xs"
+          className="bg-transparent font-medium text-dark focus:outline-none cursor-pointer text-xs pr-1"
         >
           {Object.entries(LOCALE_NAMES).map(([loc, info]) => (
             <option key={loc} value={loc} className="text-dark bg-white">

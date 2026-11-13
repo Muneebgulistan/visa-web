@@ -11,11 +11,16 @@ export default function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with SK Visa Experts on WhatsApp"
-        className="group flex items-center bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 sm:px-4 sm:py-3 rounded-full shadow-2xl hover:shadow-emerald-500/30 hover:scale-105 transition-all duration-300"
+        className="group relative flex items-center bg-dark hover:bg-black text-white p-3.5 sm:px-5 sm:py-3 rounded-pill shadow-float hover:scale-105 transition-all duration-300 border border-white/20"
       >
-        <MessageCircle className="w-6 h-6 fill-white text-emerald-600" />
-        <span className="hidden sm:inline-block font-semibold text-xs ml-2 rtl:ml-0 rtl:mr-2 tracking-wide">
-          Chat on WhatsApp
+        {/* Red Notification Badge */}
+        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-luxury-badge flex items-center justify-center text-[9px] font-bold text-white shadow-sm ring-2 ring-sage">
+          1
+        </span>
+
+        <MessageCircle className="w-5 h-5 text-luxury-highlight" />
+        <span className="hidden sm:inline-block font-medium text-xs ml-2 rtl:ml-0 rtl:mr-2 tracking-normal text-white">
+          WhatsApp Advisory
         </span>
       </a>
     </div>

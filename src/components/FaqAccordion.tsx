@@ -23,46 +23,42 @@ export default function FaqAccordion({ items, defaultOpenIndex = 0 }: FaqAccordi
   };
 
   return (
-    <div className="space-y-4 max-w-3xl mx-auto">
+    <div className="space-y-3 max-w-3xl mx-auto">
       {items.map((item, idx) => {
         const isOpen = openIndex === idx;
         return (
           <div
             key={item.id}
-            className={`border rounded-[14px] transition-all overflow-hidden ${
+            className={`rounded-2xl transition-all overflow-hidden border ${
               isOpen
-                ? 'border-teal bg-teal-50/30 shadow-sm ring-1 ring-teal/20'
-                : 'border-gray-200 bg-white hover:border-teal/40'
+                ? 'border-dark/20 bg-white shadow-soft'
+                : 'border-white/60 bg-white/70 hover:bg-white'
             }`}
           >
             <button
               type="button"
               onClick={() => toggle(idx)}
               aria-expanded={isOpen}
-              className="w-full p-5 text-left rtl:text-right flex items-center justify-between space-x-4 rtl:space-x-reverse focus:outline-none focus:ring-2 focus:ring-teal"
+              className="w-full p-4 sm:p-5 text-left rtl:text-right flex items-center justify-between space-x-4 rtl:space-x-reverse focus:outline-none"
             >
               <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                <HelpCircle
-                  className={`w-5 h-5 flex-shrink-0 ${
-                    isOpen ? 'text-teal' : 'text-gray-400'
-                  }`}
-                />
-                <span className="font-bold text-dark text-base sm:text-lg">
+                <span className="w-7 h-7 rounded-full bg-dark/5 flex items-center justify-center flex-shrink-0 text-dark">
+                  <HelpCircle className="w-4 h-4 text-luxury-accent" />
+                </span>
+                <span className="font-semibold text-dark text-sm sm:text-base">
                   {item.question}
                 </span>
               </div>
-              <ChevronDown
-                className={`w-5 h-5 text-teal flex-shrink-0 transition-transform duration-200 ${
-                  isOpen ? 'rotate-180' : ''
-                }`}
-              />
+              <div className={`btn-icon-circle w-8 h-8 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 bg-dark text-white' : 'bg-white'}`}>
+                <ChevronDown className="w-4 h-4" />
+              </div>
             </button>
 
             {isOpen && (
-              <div className="px-5 pb-5 pt-1 text-sm text-gray-700 leading-relaxed border-t border-teal-100/50">
+              <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-dark-200 leading-relaxed border-t border-dark/5">
                 <p>{item.answer}</p>
                 {item.category && (
-                  <span className="inline-block mt-3 text-[11px] font-semibold text-teal-800 bg-teal-100/80 px-2.5 py-0.5 rounded-full">
+                  <span className="inline-block mt-3 text-[10px] font-semibold tag-coral">
                     {item.category}
                   </span>
                 )}

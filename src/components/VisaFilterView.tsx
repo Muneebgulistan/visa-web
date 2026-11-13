@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import { visaList } from '@/data/visas';
 import VisaCard from '@/components/VisaCard';
 import { Search, Filter } from 'lucide-react';
-import { VisaCategory } from '@/lib/types';
 
 export default function VisaFilterView() {
   const searchParams = useSearchParams();
@@ -40,21 +39,21 @@ export default function VisaFilterView() {
   ];
 
   return (
-    <div className="space-y-8">
-      {/* Controls Bar */}
-      <div className="bg-white p-4 sm:p-6 rounded-[14px] border border-gray-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+    <div className="space-y-6">
+      {/* Controls Bar: Bento Pill Bar */}
+      <div className="bg-card-light bento-card p-3 sm:p-4 border border-white/50 shadow-soft flex flex-col md:flex-row items-center justify-between gap-3">
         {/* Category Tabs */}
-        <div className="flex items-center space-x-2 rtl:space-x-reverse overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
-          <Filter className="w-4 h-4 text-teal mr-1 flex-shrink-0" />
+        <div className="flex items-center space-x-1.5 rtl:space-x-reverse overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+          <Filter className="w-3.5 h-3.5 text-luxury-accent mr-1 flex-shrink-0" />
           {categories.map((cat) => (
             <button
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
+              className={`px-4 py-2 rounded-pill text-xs font-medium whitespace-nowrap transition-all ${
                 selectedCategory === cat.id
-                  ? 'bg-teal text-white shadow-sm'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-dark text-white font-semibold shadow-soft'
+                  : 'bg-white/70 text-dark hover:bg-white'
               }`}
             >
               {cat.label}
@@ -64,27 +63,27 @@ export default function VisaFilterView() {
 
         {/* Search input */}
         <div className="relative w-full md:w-72">
-          <Search className="w-4 h-4 text-gray-400 absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-3.5 h-3.5 text-dark-200 absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search country, visa type..."
-            className="w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal text-xs text-dark"
+            placeholder="Filter destination, category..."
+            className="w-full pl-9 rtl:pl-3.5 rtl:pr-9 pr-3.5 py-2 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
           />
         </div>
       </div>
 
       {/* Visas Grid */}
       {filteredVisas.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredVisas.map((visa) => (
             <VisaCard key={visa.id} visa={visa} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-white rounded-[14px] border border-gray-100 p-8 space-y-3">
-          <p className="text-gray-500 text-sm">
+        <div className="text-center py-16 bg-card-light bento-card border border-white/50 p-8 space-y-3">
+          <p className="text-dark-200 text-xs sm:text-sm">
             No visas found matching your filter criteria.
           </p>
           <button
@@ -93,7 +92,7 @@ export default function VisaFilterView() {
               setSelectedCategory('all');
               setSearchQuery('');
             }}
-            className="px-4 py-2 bg-teal text-white text-xs font-semibold rounded-lg hover:bg-teal-800 transition-colors"
+            className="btn-pill-primary py-2 px-5 text-xs"
           >
             Reset Filters
           </button>

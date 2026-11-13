@@ -72,7 +72,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className={inter.variable}>
-      <body className="min-h-screen flex flex-col bg-white text-dark antialiased">
+      <body className="min-h-screen flex flex-col bg-sage text-dark antialiased selection:bg-coral-300 selection:text-black">
         <NextIntlClientProvider messages={messages}>
           <LocalBusinessJsonLd />
           <Header />

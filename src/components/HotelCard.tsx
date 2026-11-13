@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { HotelItem } from '@/lib/types';
-import { Star, MapPin, Calendar, Check, ArrowRight } from 'lucide-react';
+import { Star, MapPin, Calendar, Check, ArrowUpRight } from 'lucide-react';
 import EnquiryModal from './EnquiryModal';
 
 interface HotelCardProps {
@@ -22,34 +22,36 @@ export default function HotelCard({
 
   return (
     <>
-      <div className="bg-white rounded-[14px] border border-gray-100 shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group">
+      <div className="bg-card-light bento-card border border-white/50 overflow-hidden flex flex-col justify-between group shadow-soft">
         <div>
           {/* Hotel Image & Location */}
-          <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={hotel.image}
-              alt={hotel.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-            <div className="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full font-medium flex items-center space-x-1">
-              <MapPin className="w-3 h-3 text-coral" />
-              <span>
-                {hotel.city}, {hotel.country}
-              </span>
-            </div>
-            <div className="absolute top-3 right-3 bg-amber-400 text-dark text-xs font-bold px-2 py-1 rounded-lg flex items-center space-x-1 shadow">
-              <Star className="w-3.5 h-3.5 fill-dark" />
-              <span>{hotel.userRating}</span>
+          <div className="relative h-52 w-full overflow-hidden bg-white/20 p-2">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={hotel.image}
+                alt={hotel.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div className="absolute top-2.5 left-2.5 glass-panel-dark text-white text-[11px] px-3 py-1 rounded-pill flex items-center space-x-1.5 rtl:space-x-reverse">
+                <MapPin className="w-3 h-3 text-luxury-highlight" />
+                <span>
+                  {hotel.city}, {hotel.country}
+                </span>
+              </div>
+              <div className="absolute top-2.5 right-2.5 bg-dark text-white text-[11px] font-bold px-2.5 py-1 rounded-pill flex items-center space-x-1 border border-white/20 shadow-soft">
+                <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                <span>{hotel.userRating}</span>
+              </div>
             </div>
           </div>
 
           <div className="p-6">
-            <h3 className="text-lg font-bold text-dark group-hover:text-teal transition-colors">
+            <h3 className="text-base sm:text-lg font-bold text-dark">
               {hotel.name}
             </h3>
-            <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+            <p className="text-xs text-dark-200 mt-1 line-clamp-2">
               {hotel.locationDesc}
             </p>
 
@@ -58,61 +60,61 @@ export default function HotelCard({
               {hotel.amenities.map((amenity, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center text-[10px] bg-mint text-teal font-medium px-2 py-0.5 rounded-full"
+                  className="inline-flex items-center text-[10px] bg-white/80 text-dark font-medium px-2.5 py-0.5 rounded-pill border border-white/60"
                 >
-                  <Check className="w-2.5 h-2.5 mr-1 rtl:mr-0 rtl:ml-1" />
+                  <Check className="w-2.5 h-2.5 mr-1 rtl:mr-0 rtl:ml-1 text-luxury-accent" />
                   {amenity}
                 </span>
               ))}
             </div>
 
             {/* Date Pickers */}
-            <div className="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 gap-2 text-xs">
+            <div className="mt-4 pt-4 border-t border-dark/10 grid grid-cols-2 gap-2 text-xs">
               <div>
-                <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 flex items-center">
-                  <Calendar className="w-3 h-3 mr-1 text-teal" />
+                <label className="block text-[10px] font-medium text-dark-200 mb-1 flex items-center">
+                  <Calendar className="w-3 h-3 mr-1 text-luxury-accent" />
                   Check-in
                 </label>
                 <input
                   type="date"
                   value={inDate}
                   onChange={(e) => setInDate(e.target.value)}
-                  className="w-full p-1.5 border border-gray-200 rounded-lg text-xs text-dark focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="w-full px-2.5 py-1.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
                 />
               </div>
               <div>
-                <label className="block text-[10px] uppercase font-bold text-gray-500 mb-1 flex items-center">
-                  <Calendar className="w-3 h-3 mr-1 text-teal" />
+                <label className="block text-[10px] font-medium text-dark-200 mb-1 flex items-center">
+                  <Calendar className="w-3 h-3 mr-1 text-luxury-accent" />
                   Check-out
                 </label>
                 <input
                   type="date"
                   value={outDate}
                   onChange={(e) => setOutDate(e.target.value)}
-                  className="w-full p-1.5 border border-gray-200 rounded-lg text-xs text-dark focus:outline-none focus:ring-1 focus:ring-teal"
+                  className="w-full px-2.5 py-1.5 rounded-pill bg-white text-xs text-dark border border-white/60 focus:outline-none focus:ring-1 focus:ring-dark"
                 />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Pricing & Booking Request */}
-        <div className="p-6 pt-0 border-t border-gray-100 bg-gray-50/50 mt-4">
-          <div className="flex items-center justify-between py-3">
+        {/* Pricing & Footer Button */}
+        <div className="p-6 pt-0 mt-2">
+          <div className="p-4 bg-white/80 rounded-2xl border border-white/60 flex items-center justify-between">
             <div>
-              <span className="text-[11px] text-gray-500 block">From</span>
-              <span className="text-xl font-extrabold text-teal">
-                {hotel.pricePerNight} {hotel.currency}
+              <span className="text-[10px] text-dark-200 block">Nightly Rate</span>
+              <span className="text-lg font-bold text-dark">
+                {hotel.pricePerNight} <span className="text-xs font-normal text-dark-200">{hotel.currency}</span>
               </span>
-              <span className="text-[10px] text-gray-500 block">per night</span>
+              <span className="text-[10px] text-dark-200 block">per night</span>
             </div>
             <button
               type="button"
               onClick={() => setModalOpen(true)}
-              className="py-2.5 px-4 rounded-[14px] bg-coral hover:bg-coral-600 text-white font-semibold text-xs transition-colors flex items-center space-x-1.5 rtl:space-x-reverse shadow-sm"
+              className="btn-pill-primary py-2 px-4 text-xs gap-1.5 shadow-soft"
             >
-              <span>Book Voucher</span>
-              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+              <span>Voucher</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-luxury-highlight" />
             </button>
           </div>
         </div>
@@ -121,7 +123,7 @@ export default function HotelCard({
       <EnquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        serviceTitle={`Hotel Reservation: ${hotel.name}`}
+        serviceTitle={`Hotel Voucher: ${hotel.name}`}
         defaultCategory="Embassy Hotel Voucher"
         defaultDestination={`${hotel.city}, ${hotel.country}`}
         price={hotel.pricePerNight}

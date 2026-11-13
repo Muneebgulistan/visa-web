@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import FaqAccordion from '@/components/FaqAccordion';
-import { Link } from '@/i18n/routing';
 import { HelpCircle, Phone, MessageCircle } from 'lucide-react';
 
 export default function FaqPage() {
@@ -62,16 +61,16 @@ export default function FaqPage() {
   ];
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
-      {/* Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="text-xs font-bold text-coral uppercase tracking-widest block">
-          Knowledge Base & Help Desk
+    <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+      {/* Header: Bento Light Card */}
+      <div className="bg-card-light bento-card p-8 sm:p-12 border border-white/50 text-center max-w-4xl mx-auto space-y-4 shadow-soft">
+        <span className="tag-coral text-xs mb-1">
+          Knowledge Base &amp; Protocol
         </span>
-        <h1 className="text-3xl sm:text-5xl font-black text-dark tracking-tight">
-          {t('title')}
+        <h1 className="text-3xl sm:text-5xl font-normal text-dark tracking-tight">
+          <span className="font-light italic">Frequently</span> Addressed Inquiries
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+        <p className="text-xs sm:text-sm text-dark-200 leading-relaxed max-w-xl mx-auto">
           {t('subtitle')}
         </p>
       </div>
@@ -79,15 +78,15 @@ export default function FaqPage() {
       {/* Accordion List */}
       <FaqAccordion items={allFaqs} defaultOpenIndex={0} />
 
-      {/* Still Have Questions Box */}
-      <div className="bg-mint rounded-[14px] p-8 border border-teal-100 max-w-3xl mx-auto text-center space-y-4">
-        <div className="w-12 h-12 rounded-full bg-teal text-white flex items-center justify-center mx-auto">
-          <HelpCircle className="w-6 h-6" />
+      {/* Still Have Questions Box: Bento Dark Card */}
+      <div className="bg-card-dark text-white bento-card p-8 sm:p-10 border border-white/10 max-w-3xl mx-auto text-center space-y-4 shadow-float">
+        <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto text-white">
+          <HelpCircle className="w-6 h-6 text-luxury-highlight" />
         </div>
-        <h3 className="text-xl font-bold text-teal-900">
-          Still Have Questions Regarding Your Visa Case?
+        <h3 className="text-lg sm:text-xl font-normal text-white">
+          <span className="font-light italic">Direct Questions</span> Regarding Your Dossier?
         </h3>
-        <p className="text-xs sm:text-sm text-gray-600 max-w-lg mx-auto">
+        <p className="text-xs sm:text-sm text-white/70 max-w-md mx-auto">
           Every consular case has unique nuances. Speak with our designated Riyadh case officer directly via phone or WhatsApp.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -95,16 +94,16 @@ export default function FaqPage() {
             href="https://wa.me/966599326936"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-5 py-2.5 rounded-[14px] bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition-colors shadow"
+            className="btn-pill-primary w-full sm:w-auto py-2.5 px-5 text-xs gap-1.5 bg-dark border border-white/20 text-white hover:bg-black"
           >
-            <MessageCircle className="w-4 h-4" />
+            <MessageCircle className="w-4 h-4 text-luxury-highlight" />
             <span>WhatsApp (+966 59 932 6936)</span>
           </a>
           <a
             href="tel:+966599326936"
-            className="w-full sm:w-auto px-5 py-2.5 rounded-[14px] bg-teal hover:bg-teal-800 text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition-colors shadow"
+            className="btn-pill-primary w-full sm:w-auto py-2.5 px-5 text-xs gap-1.5 bg-white text-dark hover:bg-white/90"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-3.5 h-3.5 text-dark" />
             <span dir="ltr">Call +966 59 932 6936</span>
           </a>
         </div>

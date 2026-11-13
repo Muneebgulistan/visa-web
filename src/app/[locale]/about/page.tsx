@@ -11,7 +11,7 @@ import {
   MapPin,
   Phone,
   Star,
-  ArrowRight,
+  ArrowUpRight,
 } from 'lucide-react';
 
 export default function AboutPage() {
@@ -40,59 +40,60 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
-      {/* 1. Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="text-xs font-bold text-coral uppercase tracking-widest block">
-          Riyadh Immigration & Travel Pioneers
+    <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+      {/* 1. Header: Bento Light Card */}
+      <div className="bg-card-light bento-card p-8 sm:p-12 border border-white/50 text-center max-w-4xl mx-auto space-y-3 shadow-soft">
+        <span className="tag-coral text-xs mb-1">
+          Riyadh Immigration &amp; Travel Pioneers
         </span>
-        <h1 className="text-3xl sm:text-5xl font-black text-dark tracking-tight">
-          {t('title')}
+        <h1 className="text-3xl sm:text-5xl font-normal text-dark tracking-tight">
+          <span className="font-light italic">Advisory</span> Excellence &amp; Story
         </h1>
-        <p className="text-base text-gray-600 leading-relaxed">
+        <p className="text-xs sm:text-sm text-dark-200 leading-relaxed max-w-xl mx-auto">
           {t('subtitle')}
         </p>
       </div>
 
-      {/* 2. Company Story */}
-      <div className="bg-white rounded-[14px] border border-gray-100 shadow-md p-8 sm:p-12">
+      {/* 2. Company Story: Bento Grid Tile */}
+      <div className="bg-card-light bento-card border border-white/50 p-6 sm:p-10 shadow-soft">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <span className="text-xs font-bold text-teal uppercase tracking-wider block">
+            <span className="tag-coral text-xs">
               Established in Riyadh
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-dark">
-              {t('storyTitle')}
+            <h2 className="text-2xl sm:text-3xl font-normal text-dark">
+              <span className="font-light italic">Dossier</span> Preparation &amp; Protocol
             </h2>
-            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+            <p className="text-xs sm:text-sm text-dark-200 leading-relaxed">
               {t('storyP1')}
             </p>
-            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+            <p className="text-xs sm:text-sm text-dark-200 leading-relaxed">
               {t('storyP2')}
             </p>
 
-            <div className="pt-2 flex items-center space-x-6 rtl:space-x-reverse text-xs text-gray-600">
-              <span className="flex items-center space-x-1.5 rtl:space-x-reverse font-semibold text-teal">
-                <MapPin className="w-4 h-4 text-coral" />
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-dark-200">
+              <span className="flex items-center space-x-1.5 rtl:space-x-reverse font-medium">
+                <MapPin className="w-3.5 h-3.5 text-luxury-highlight" />
                 <span>Umm Al Hamam Al Sharqi</span>
               </span>
-              <span className="flex items-center space-x-1.5 rtl:space-x-reverse font-semibold text-teal">
-                <Star className="w-4 h-4 text-amber-500 fill-amber-400" />
+              <span className="flex items-center space-x-1.5 rtl:space-x-reverse font-medium">
+                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
                 <span>4.4 from 71 Google reviews</span>
               </span>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative">
-            <div className="rounded-[14px] overflow-hidden shadow-lg border border-gray-100">
+          <div className="lg:col-span-5 relative p-2 bg-white/20 rounded-3xl">
+            <div className="rounded-2xl overflow-hidden shadow-soft">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
                 alt="Riyadh Skyline"
-                className="w-full h-80 object-cover"
+                className="w-full h-72 object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 -left-4 rtl:-left-auto rtl:-right-4 bg-teal text-white p-4 rounded-xl shadow-lg text-xs font-bold">
+            <div className="absolute bottom-4 left-4 rtl:left-auto rtl:right-4 bg-dark text-white py-2 px-4 rounded-pill shadow-soft text-xs font-semibold flex items-center space-x-2 border border-white/20">
+              <span className="w-2 h-2 rounded-full bg-luxury-highlight" />
               <span>99.2% Audit Accuracy</span>
             </div>
           </div>
@@ -100,73 +101,66 @@ export default function AboutPage() {
       </div>
 
       {/* 3. Why Choose Us (4 pillars) */}
-      <div className="space-y-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-bold text-coral uppercase tracking-widest block mb-2">
-            The SK Advantage
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-dark">
-            {t('whyTitle')}
+      <div className="space-y-4 pt-4">
+        <div className="px-2">
+          <span className="tag-coral text-xs mb-1">The SK Advantage</span>
+          <h2 className="text-2xl sm:text-4xl font-normal text-dark tracking-tight">
+            <span className="font-light italic">Strategic</span> Advantages
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-mint p-6 rounded-[14px] border border-teal-100 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center">
-              <Compass className="w-5 h-5" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-card-light bento-card p-6 border border-white/50 space-y-3">
+            <div className="w-10 h-10 rounded-[20px] bg-dark text-white flex items-center justify-center">
+              <Compass className="w-5 h-5 text-luxury-accent" />
             </div>
-            <h3 className="text-base font-bold text-dark">{t('why1Title')}</h3>
-            <p className="text-xs text-gray-600 leading-relaxed">{t('why1Desc')}</p>
+            <h3 className="text-sm font-bold text-dark">{t('why1Title')}</h3>
+            <p className="text-xs text-dark-200 leading-relaxed">{t('why1Desc')}</p>
           </div>
 
-          <div className="bg-mint p-6 rounded-[14px] border border-teal-100 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5" />
+          <div className="bg-card-light bento-card p-6 border border-white/50 space-y-3">
+            <div className="w-10 h-10 rounded-[20px] bg-dark text-white flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-luxury-accent" />
             </div>
-            <h3 className="text-base font-bold text-dark">{t('why2Title')}</h3>
-            <p className="text-xs text-gray-600 leading-relaxed">{t('why2Desc')}</p>
+            <h3 className="text-sm font-bold text-dark">{t('why2Title')}</h3>
+            <p className="text-xs text-dark-200 leading-relaxed">{t('why2Desc')}</p>
           </div>
 
-          <div className="bg-mint p-6 rounded-[14px] border border-teal-100 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center">
-              <Award className="w-5 h-5" />
+          <div className="bg-card-light bento-card p-6 border border-white/50 space-y-3">
+            <div className="w-10 h-10 rounded-[20px] bg-dark text-white flex items-center justify-center">
+              <Award className="w-5 h-5 text-luxury-highlight" />
             </div>
-            <h3 className="text-base font-bold text-dark">{t('why3Title')}</h3>
-            <p className="text-xs text-gray-600 leading-relaxed">{t('why3Desc')}</p>
+            <h3 className="text-sm font-bold text-dark">{t('why3Title')}</h3>
+            <p className="text-xs text-dark-200 leading-relaxed">{t('why3Desc')}</p>
           </div>
 
-          <div className="bg-mint p-6 rounded-[14px] border border-teal-100 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center">
-              <Phone className="w-5 h-5" />
+          <div className="bg-card-light bento-card p-6 border border-white/50 space-y-3">
+            <div className="w-10 h-10 rounded-[20px] bg-dark text-white flex items-center justify-center">
+              <Phone className="w-5 h-5 text-luxury-accent" />
             </div>
-            <h3 className="text-base font-bold text-dark">{t('why4Title')}</h3>
-            <p className="text-xs text-gray-600 leading-relaxed">{t('why4Desc')}</p>
+            <h3 className="text-sm font-bold text-dark">{t('why4Title')}</h3>
+            <p className="text-xs text-dark-200 leading-relaxed">{t('why4Desc')}</p>
           </div>
         </div>
       </div>
 
       {/* 4. Leadership Team */}
-      <div className="space-y-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-bold text-coral uppercase tracking-widest block mb-2">
-            Professional Guidance
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-dark">
-            {t('teamTitle')}
+      <div className="space-y-4 pt-4">
+        <div className="px-2">
+          <span className="tag-coral text-xs mb-1">Professional Guidance</span>
+          <h2 className="text-2xl sm:text-4xl font-normal text-dark tracking-tight">
+            <span className="font-light italic">Consular</span> Advisory Leadership
           </h2>
-          <p className="text-sm text-gray-600 mt-2">
-            {t('teamSubtitle')}
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {team.map((member, i) => (
             <div
               key={i}
-              className="bg-white rounded-[14px] border border-gray-100 shadow-sm overflow-hidden flex flex-col justify-between"
+              className="bg-card-light bento-card border border-white/50 overflow-hidden flex flex-col justify-between p-2 shadow-soft"
             >
               <div>
-                <div className="h-56 bg-gray-100 overflow-hidden">
+                <div className="h-56 rounded-2xl overflow-hidden bg-white/20">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={member.image}
@@ -174,12 +168,12 @@ export default function AboutPage() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-dark">{member.name}</h3>
-                  <span className="text-xs font-semibold text-teal block mt-0.5 mb-2">
+                <div className="p-4 sm:p-5">
+                  <h3 className="text-base font-bold text-dark">{member.name}</h3>
+                  <span className="text-xs font-medium text-dark-200 block mt-0.5 mb-2">
                     {member.role}
                   </span>
-                  <p className="text-xs text-gray-600 leading-relaxed">
+                  <p className="text-xs text-dark-200 leading-relaxed">
                     {member.bio}
                   </p>
                 </div>
@@ -189,21 +183,22 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* 5. Contact Callout */}
-      <div className="bg-dark text-white rounded-[14px] p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+      {/* 5. Contact Callout: Dark Bento Card */}
+      <div className="bg-card-dark text-white bento-card p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-float border border-white/10">
         <div className="space-y-2 text-center md:text-left rtl:md:text-right">
-          <h3 className="text-xl sm:text-2xl font-bold">
-            Have a Specific Case or Complex Travel Requirement?
+          <h3 className="text-xl sm:text-2xl font-normal">
+            <span className="font-light italic">Complex Case</span> or Consular Query?
           </h3>
-          <p className="text-xs sm:text-sm text-gray-300">
+          <p className="text-xs sm:text-sm text-white/70">
             Our Riyadh specialists in Umm Al Hamam are available for in-person and digital consultations.
           </p>
         </div>
         <Link
           href="/contact"
-          className="px-6 py-3 rounded-[14px] bg-coral hover:bg-coral-600 text-white font-bold text-sm transition-all whitespace-nowrap shadow"
+          className="btn-pill-primary py-3 px-6 text-xs gap-1.5 bg-white text-dark hover:bg-white/90 whitespace-nowrap"
         >
-          Schedule Consultation
+          <span>Schedule Consultation</span>
+          <ArrowUpRight className="w-4 h-4 text-dark" />
         </Link>
       </div>
     </div>

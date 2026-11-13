@@ -11,6 +11,7 @@ import {
   AlertCircle,
   Copy,
   Loader2,
+  ArrowUpRight,
 } from 'lucide-react';
 import { PaymentGatewayId } from '@/lib/types';
 
@@ -80,7 +81,7 @@ const GATEWAYS: GatewayInfo[] = [
     name: 'Saudi Bank Transfer (IBAN)',
     category: 'bank',
     description: 'Direct wire to Al Rajhi / SNB with reference slip',
-    badge: 'Zero Processing Fees',
+    badge: 'Zero Fees',
     icon: Building2,
   },
   {
@@ -145,7 +146,6 @@ export default function PaymentSelector({
       setResult(data);
 
       if (data.redirectUrl) {
-        // Redirect to hosted payment checkout in 1.5s
         setTimeout(() => {
           window.location.href = data.redirectUrl;
         }, 1200);
@@ -168,35 +168,35 @@ export default function PaymentSelector({
   };
 
   return (
-    <div className="bg-white rounded-[14px] border border-gray-100 shadow-xl overflow-hidden max-w-2xl w-full mx-auto">
+    <div className="bg-card-light bento-card rounded-2xl border border-white/60 shadow-soft overflow-hidden max-w-2xl w-full mx-auto">
       {/* Header */}
-      <div className="bg-teal-700 text-white p-6">
+      <div className="bg-card-dark text-white p-5 sm:p-6 border-b border-white/10">
         <div className="flex justify-between items-start">
           <div>
-            <span className="inline-block text-xs uppercase tracking-wider bg-teal-800/80 text-teal-100 px-2.5 py-1 rounded-full mb-2">
-              Secure Checkout
+            <span className="tag-coral text-[10px] py-0.5 px-2 mb-1">
+              Secure Protocol
             </span>
-            <h3 className="text-xl font-bold">{itemTitle}</h3>
-            <p className="text-teal-100 text-sm mt-1">
-              Select one of our 8 authorized payment methods
+            <h3 className="text-base sm:text-lg font-bold text-white mt-1">{itemTitle}</h3>
+            <p className="text-white/60 text-xs mt-0.5">
+              Select one of our 8 authorized payment options
             </p>
           </div>
           <div className="text-right">
-            <span className="text-xs text-teal-200 block">Total Due</span>
-            <span className="text-2xl font-extrabold text-white">
-              {amount} {currency}
+            <span className="text-[10px] text-white/50 block">Amount</span>
+            <span className="text-xl sm:text-2xl font-bold text-white">
+              {amount} <span className="text-xs font-normal text-white/70">{currency}</span>
             </span>
           </div>
         </div>
       </div>
 
-      <div className="p-6 space-y-6">
+      <div className="p-5 sm:p-6 space-y-5">
         {/* Gateway Selection Grid */}
         <div>
-          <label className="block text-sm font-semibold text-dark mb-3">
-            Choose Payment Method (All 8 Supported Gateways)
+          <label className="block text-xs font-medium text-dark-200 mb-2">
+            Payment Methods
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
             {GATEWAYS.map((gw) => {
               const Icon = gw.icon;
               const isSelected = selectedGateway === gw.id;
@@ -209,31 +209,31 @@ export default function PaymentSelector({
                     setResult(null);
                     setError(null);
                   }}
-                  className={`flex items-start p-3.5 rounded-[14px] border text-left transition-all relative ${
+                  className={`flex items-start p-3 rounded-2xl border text-left transition-all relative ${
                     isSelected
-                      ? 'border-teal bg-teal-50/70 ring-2 ring-teal/30 shadow-sm'
-                      : 'border-gray-200 hover:border-teal/50 hover:bg-gray-50'
+                      ? 'border-dark bg-white ring-2 ring-dark shadow-soft'
+                      : 'border-white/60 bg-white/70 hover:bg-white'
                   }`}
                 >
                   <div
-                    className={`p-2 rounded-lg mr-3 ${
-                      isSelected ? 'bg-teal text-white' : 'bg-gray-100 text-gray-600'
+                    className={`w-8 h-8 rounded-full flex items-center justify-center mr-2.5 rtl:mr-0 rtl:ml-2.5 flex-shrink-0 ${
+                      isSelected ? 'bg-dark text-white' : 'bg-dark/5 text-dark'
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4 h-4" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-sm text-dark truncate">
+                      <span className="font-semibold text-xs text-dark truncate">
                         {gw.name}
                       </span>
                       {gw.badge && (
-                        <span className="text-[10px] font-medium bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded">
+                        <span className="text-[9px] font-medium tag-coral py-0 px-1.5">
                           {gw.badge}
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                    <p className="text-[11px] text-dark-200 mt-0.5 line-clamp-1">
                       {gw.description}
                     </p>
                   </div>
@@ -245,63 +245,63 @@ export default function PaymentSelector({
 
         {/* Error message */}
         {error && (
-          <div className="p-4 rounded-[14px] bg-red-50 border border-red-200 text-red-700 flex items-center space-x-2 text-sm">
-            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <div className="p-3 rounded-2xl bg-red-100 border border-red-200 text-red-900 flex items-center space-x-2 text-xs">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 text-luxury-badge" />
             <span>{error}</span>
           </div>
         )}
 
         {/* Result & Instructions */}
         {result && (
-          <div className="p-5 rounded-[14px] bg-teal-50 border border-teal-200 space-y-4">
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="w-6 h-6 text-teal-700 flex-shrink-0 mt-0.5" />
+          <div className="p-5 rounded-2xl bg-white border border-white/60 space-y-3 shadow-soft">
+            <div className="flex items-start space-x-2.5">
+              <CheckCircle2 className="w-5 h-5 text-luxury-accent flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-teal-900">
+                <h4 className="font-semibold text-dark text-sm">
                   {result.gateway === 'bank-transfer'
                     ? 'Bank Transfer Instructions Generated'
-                    : 'Payment Session Created'}
+                    : 'Payment Session Initialized'}
                 </h4>
-                <p className="text-sm text-teal-800 mt-1">
-                  {result.message || 'Session ready. Proceed with the instructions below.'}
+                <p className="text-xs text-dark-200 mt-0.5">
+                  {result.message || 'Proceed with the details below.'}
                 </p>
               </div>
             </div>
 
             {/* Bank details preview */}
             {result.bankDetails && (
-              <div className="bg-white p-4 rounded-xl border border-teal-100 text-xs space-y-2.5">
-                <div className="flex justify-between items-center py-1 border-b border-gray-100">
-                  <span className="text-gray-500">Bank:</span>
+              <div className="bg-card-light/60 p-4 rounded-xl border border-white/60 text-xs space-y-2">
+                <div className="flex justify-between items-center py-1 border-b border-dark/5">
+                  <span className="text-dark-200">Bank:</span>
                   <span className="font-semibold text-dark">{result.bankDetails.bankName}</span>
                 </div>
-                <div className="flex justify-between items-center py-1 border-b border-gray-100">
-                  <span className="text-gray-500">Account Name:</span>
+                <div className="flex justify-between items-center py-1 border-b border-dark/5">
+                  <span className="text-dark-200">Account:</span>
                   <span className="font-semibold text-dark">{result.bankDetails.accountName}</span>
                 </div>
-                <div className="flex justify-between items-center py-1 border-b border-gray-100">
-                  <span className="text-gray-500">IBAN:</span>
+                <div className="flex justify-between items-center py-1 border-b border-dark/5">
+                  <span className="text-dark-200">IBAN:</span>
                   <div className="flex items-center space-x-2">
                     <span className="font-mono font-bold text-dark">{result.bankDetails.iban}</span>
                     <button
                       type="button"
                       onClick={() => copyToClipboard(result.bankDetails.iban)}
-                      className="text-teal hover:text-teal-800 p-1"
+                      className="text-dark hover:text-black p-1"
                       title="Copy IBAN"
                     >
                       <Copy className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
-                <div className="flex justify-between items-center py-1 border-b border-gray-100">
-                  <span className="text-gray-500">Payment Reference:</span>
-                  <span className="font-mono font-bold text-coral-600">
+                <div className="flex justify-between items-center py-1 border-b border-dark/5">
+                  <span className="text-dark-200">Reference:</span>
+                  <span className="font-mono font-bold text-dark">
                     {result.bankDetails.referenceNumber}
                   </span>
                 </div>
                 {copiedIban && (
-                  <p className="text-emerald-600 text-[11px] font-medium text-right">
-                    ✓ IBAN copied to clipboard
+                  <p className="text-emerald-700 text-[11px] font-medium text-right">
+                    ✓ IBAN copied
                   </p>
                 )}
                 <div className="pt-2">
@@ -309,7 +309,7 @@ export default function PaymentSelector({
                     href={result.bankDetails.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg text-xs transition-colors"
+                    className="btn-pill-primary w-full py-2 text-xs gap-1.5 justify-center bg-dark text-white"
                   >
                     Confirm via WhatsApp (+966 59 932 6936)
                   </a>
@@ -324,10 +324,10 @@ export default function PaymentSelector({
                   href={result.redirectUrl || result.demoCheckoutUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full py-2.5 bg-coral hover:bg-coral-600 text-white font-semibold rounded-lg text-sm transition-colors shadow-sm"
+                  className="btn-pill-primary w-full py-2.5 text-xs gap-1.5 justify-center shadow-soft"
                 >
                   <span>Open Gateway Checkout Page</span>
-                  <ExternalLink className="w-4 h-4 ml-2" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-luxury-highlight" />
                 </a>
               </div>
             )}
@@ -340,28 +340,28 @@ export default function PaymentSelector({
             type="button"
             onClick={handleProcessPayment}
             disabled={loading}
-            className="w-full py-3.5 px-6 rounded-[14px] bg-coral hover:bg-coral-600 text-white font-semibold text-base transition-all shadow-md hover:shadow-lg disabled:opacity-70 flex items-center justify-center space-x-2"
+            className="btn-pill-primary w-full py-3.5 text-xs sm:text-sm gap-2 shadow-soft disabled:opacity-60"
           >
             {loading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin" />
                 <span>Processing Server Request...</span>
               </>
             ) : (
               <>
-                <ShieldCheck className="w-5 h-5" />
                 <span>
                   Proceed with {GATEWAYS.find((g) => g.id === selectedGateway)?.name}
                 </span>
+                <ArrowUpRight className="w-4 h-4 text-luxury-highlight" />
               </>
             )}
           </button>
         )}
 
         {/* Security badge footer */}
-        <div className="flex items-center justify-center text-xs text-gray-500 space-x-1.5 pt-1">
-          <ShieldCheck className="w-4 h-4 text-teal" />
-          <span>Server-side encryption. No card details stored.</span>
+        <div className="flex items-center justify-center text-[11px] text-dark-200 space-x-1.5 pt-1">
+          <ShieldCheck className="w-3.5 h-3.5 text-luxury-accent" />
+          <span>Server-side encryption. No raw card credentials stored.</span>
         </div>
       </div>
     </div>
